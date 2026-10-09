@@ -1,0 +1,21 @@
+/* Variables globales, utilisables partout avec var(--nom) */
+:root {
+  --taskbar-height: 30px; /* hauteur de la future barre des tâches */
+}
+
+/* La largeur d'un élément inclut son padding et sa bordure :
+   un élément de 100 px fait vraiment 100 px */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Le bureau occupe tout l'écran : pas de marge par défaut du navigateur,
+   et jamais de barre de défilement sur la page elle-même */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
