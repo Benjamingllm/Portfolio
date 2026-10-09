@@ -4,7 +4,8 @@ const folderClosed = '/icons/Folder Closed.png'
 export const apps = [
     {
         name: "Folder",
-        icon: folderClosed
+        icon: folderClosed,
+        id:"folder"
     }
 
 

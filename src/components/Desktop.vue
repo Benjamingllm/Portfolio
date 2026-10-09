@@ -2,6 +2,13 @@
 import { ref } from 'vue'
 import icon from './Icon.vue'
 import { apps } from '../data/apps.js'
+import { useWindowsStore } from '../stores/windows.js'
+console.log(apps)
+const windowsStore = useWindowsStore()
+
+function openapp(app) {
+    windowsStore.openWindow(app.id)
+}
 </script>
 <style scoped>
 .desktop {
@@ -26,24 +33,8 @@ import { apps } from '../data/apps.js'
         
         
         <div class="grid">
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
-            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" />
+            <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" @open="openapp(app)"/>
+            
 
         </div>
     </div>

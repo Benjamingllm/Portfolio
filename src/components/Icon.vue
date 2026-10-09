@@ -11,6 +11,8 @@ defineProps({
     }
 
 })
+
+const emit = defineEmits(['select', 'open'])
 </script>
 <style scoped>
 .icon_image {
@@ -38,7 +40,7 @@ p {
 }
 </style>
 <template>
-    <div class="icon">
+    <div class="icon"  @click="emit('select')" @dblclick="emit('open')">
         <img v-bind:src="image" alt="" class="icon_image">
         <p>{{ name }}</p>
         
