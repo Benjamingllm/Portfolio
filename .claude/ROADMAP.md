@@ -7,8 +7,6 @@ Stack : HTML, CSS, JavaScript sans framework, modules JS natifs, [XP.css](https:
 
 | # | Étape | Ce que ça couvre | Estimation |
 |---|-------|------------------|-----------|
-| 1 | Mise en place | Dépôt GitHub, `index.html`, XP.css branché, Live Server, premier déploiement sur GitHub Pages | 2 h |
-| 2 | Bureau | Fond d'écran, icônes ; un double-clic ouvre l'application | 2 h |
 | 3 | Fenêtre générique | Ouvrir, fermer, déplacer à la souris, passer au premier plan au clic | 8 h |
 | 4 | Barre des tâches | Bouton Démarrer, un bouton par fenêtre ouverte, réduire et restaurer, horloge | 4 h |
 | 5 | Menu Démarrer | Liste des applications, ouverture au clic | 2 h |
