@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Desktop from './components/Desktop.vue'
+import taskbar from './components/taskbar.vue'
 import { useWindowsStore } from './stores/windows.js'
 const windowsStore = useWindowsStore()
 
@@ -27,6 +28,7 @@ const windowsStore = useWindowsStore()
 
   </div>
   <Desktop />
+  <taskbar />
 
 </template>
 

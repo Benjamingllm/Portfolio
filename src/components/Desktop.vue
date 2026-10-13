@@ -13,7 +13,7 @@ function openapp(app) {
 <style scoped>
 .desktop {
   padding: 3vmin;
-  height: 100dvh;
+  flex: 1;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -38,5 +38,6 @@ function openapp(app) {
             
 
         </div>
+
     </div>
 </template>

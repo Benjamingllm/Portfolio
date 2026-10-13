@@ -44,5 +44,19 @@ export const useWindowsStore = defineStore('windows', () => {
       windows.value = windows.value.filter(window => window.id !== appid)
   }
 
-  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow }
+  function toogleFromTaskbar(appid) {
+    const win = windows.value.find(window => window.id === appid)
+    if (win) {
+      if (win.minimized) {
+        focusWindow(appid)
+      }
+      else if (activeId.value === appid) {
+        minimizeWindow(appid)
+      }
+    else {
+      focusWindow(appid)
+    }
+    }}
+
+  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toogleFromTaskbar}
 })
