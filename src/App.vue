@@ -8,12 +8,12 @@ const windowsStore = useWindowsStore()
 
 <template>
   
-  <div class="windows">
-    <div v-for="(window, index) in windowsStore.windows" :key="index" class="window">
+  <div class="windows" >
+    <div v-for="(window, ) in windowsStore.windows" :key="window.id" class="window" v-show="!window.minimized" >
       <div class="title-bar">
         <span class="title-bar-text">{{ window.id }}</span>
           <div class="title-bar-controls">
-              <button aria-label="Minimize"></button>
+              <button aria-label="Minimize" @click="windowsStore.minimizeWindow(window.id)"></button>
               <button aria-label="Restore"></button>
               <button aria-label="Close" @click="windowsStore.closeWindow(window.id)"></button>
           </div>
