@@ -37,11 +37,13 @@ export const useWindowsStore = defineStore('windows', () => {
     const win = windows.value.find(window => window.id === appid)
     if (win) {
       win.minimized = true
+      activeId.value = null
     }
 
   }
   function closeWindow(appid) {
       windows.value = windows.value.filter(window => window.id !== appid)
+      activeId.value = null
   }
 
   function toogleFromTaskbar(appid) {

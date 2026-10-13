@@ -10,8 +10,8 @@ const windowsStore = useWindowsStore()
             <span class="start-flag" aria-hidden="true"></span>
             <span class="start-label">démarrer</span>
         </button>
-        <div class="taskbar-icons">
-            <div v-for="(window) in windowsStore.windows" :key="window.id" class="taskbar-icon" @click="windowsStore.toogleFromTaskbar(window.id)">
+        <div class="taskbar-icons" >
+            <div v-for="(window) in windowsStore.windows" :key="window.id" class="taskbar-icon" @click="windowsStore.toogleFromTaskbar(window.id)" :class="{ active: window.id === windowsStore.activeId }">
                 <img v-bind:src="apps.find(app => app.id === window.id).icon" alt="" />
             </div>
         </div>

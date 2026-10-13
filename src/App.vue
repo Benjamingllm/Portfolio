@@ -10,7 +10,7 @@ const windowsStore = useWindowsStore()
 <template>
   
   <div class="windows" >
-    <div v-for="(window, ) in windowsStore.windows" :key="window.id" class="window" v-show="!window.minimized" >
+    <div v-for="(window, ) in windowsStore.windows" :key="window.id" class="window" v-show="!window.minimized" v-bind:style="{ 'z-index': window.zIndex }" @mousedown="windowsStore.focusWindow(window.id)">
       <div class="title-bar">
         <span class="title-bar-text">{{ window.id }}</span>
           <div class="title-bar-controls">
@@ -42,6 +42,9 @@ const windowsStore = useWindowsStore()
   pointer-events: none
 }
 .window {
+  position: absolute;
+  top: 0;
+  left: 0;
   pointer-events: auto;
 }
 </style>

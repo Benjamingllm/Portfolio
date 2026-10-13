@@ -26,6 +26,6 @@ Vue 3 (`<script setup>`) + Vite, Pinia pour l'état, `xp.css` pour le style des 
 
 Mis à jour à la fin de chaque échange qui tranche quelque chose (2-3 lignes).
 
-- Décidé : empilement des fenêtres par `zIndex` explicite (+ compteur `topZ`) plutôt que par l'ordre du tableau, pour ne pas casser le futur déplacement à la souris. Store enrichi : `{ id, minimized, zIndex }` + `activeId`. Layout en flex colonne (bureau en `flex: 1`, barre à hauteur naturelle).
-- En cours : barre des tâches. Benjamin écrit le store, puis le composant (3 zones : Démarrer | boutons de tâches | horloge). Menu Démarrer prévu juste après.
-- Ouvert : déplacement des fenêtres à la souris, contenu réel des apps, hébergement.
+- Décidé : empilement des fenêtres par `zIndex` explicite (+ compteur `topZ`), appliqué via `:style` sur des fenêtres en `position: absolute`. Store : `{ id, minimized, zIndex }` + `activeId`. Focus au `mousedown` sur la fenêtre (comportement XP, évite le conflit de bubbling avec les boutons de la barre de titre, base du futur drag). `activeId` remis à `null` quand on réduit/ferme (pas de réactivation auto). État actif de la barre des tâches via `:class`. Layout en flex colonne.
+- En cours : finir la barre des tâches : build de prod cassé (lightningcss refuse un sélecteur de `xp.css` → piste `build.cssMinify`), fenêtres pouvant passer devant la barre (contexte d'empilement sur `.windows`).
+- Ouvert : menu Démarrer, horloge, déplacement des fenêtres, nettoyage (`toogle`, imports inutilisés, `div` → `button` dans la barre), contenu réel des apps, hébergement.
