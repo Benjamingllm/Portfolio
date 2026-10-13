@@ -6,6 +6,12 @@ export const apps = [
         name: "Folder",
         icon: folderClosed,
         id:"folder"
+    },
+
+    {
+        name: "fichier",
+        icon: folderClosed,
+        id:"fichier"
     }
 
 

@@ -35,6 +35,7 @@ function openapp(app) {
         <div class="grid">
             <icon v-for="(app, index) in apps" :key="index" :name="app.name" :size="48" :image="app.icon" @open="openapp(app)"/>
             
+            
 
         </div>
     </div>

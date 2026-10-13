@@ -18,7 +18,10 @@ const windowsStore = useWindowsStore()
               <button aria-label="Close" @click="windowsStore.closeWindow(window.id)"></button>
           </div>
       </div>
-      
+      <div class="window-body">
+
+        <p>Ma premiere fenêtre</p>
+      </div>
     </div>
 
 
@@ -32,8 +35,8 @@ const windowsStore = useWindowsStore()
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  height: 60%;
   pointer-events: none
 }
 .window {
