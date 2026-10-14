@@ -7,7 +7,6 @@ export const useWindowsStore = defineStore('windows', () => {
   const activeId = ref(null)
 
 
-
   function focusWindow(appid) {
     const win = windows.value.find(window => window.id === appid)
     if (win) {
@@ -16,14 +15,23 @@ export const useWindowsStore = defineStore('windows', () => {
       win.minimized = false
       win.zIndex = topZ.value
 
-      
+
     }
   }
+
+  function moveWindow(appid, x, y) {
+    const win = windows.value.find(window => window.id === appid)
+    if (win) {
+      win.x = x
+      win.y = y
+    }
+  }
+
   function openWindow(appid) {
     const win = !windows.value.some(app => app.id === appid)
 
     if (win) {
-      windows.value.push({ id: appid , zIndex: 0, minimized: false})
+      windows.value.push({ id: appid , zIndex: 0,x: 0, y: 0, minimized: false})
       focusWindow(appid)
       return
     }
@@ -60,5 +68,5 @@ export const useWindowsStore = defineStore('windows', () => {
     }
     }}
 
-  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toogleFromTaskbar}
+  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toogleFromTaskbar, moveWindow}
 })
