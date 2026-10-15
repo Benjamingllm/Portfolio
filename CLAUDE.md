@@ -31,7 +31,8 @@ Mis à jour à la fin de chaque échange qui tranche quelque chose (2-3 lignes).
 - Fait : agrandir/restaurer (`maximized` dans le store, `maximizeWindow` bascule, classe `.maximized`, drag désactivé quand agrandie).
 - Fait (à tester dans le navigateur) : clamp dans `onDrag` (`App.vue`), bornes = taille mesurée de `.windows` via une ref de template, `MIN_VISIBLE = 40` px toujours visibles. La barre des tâches reste devant les fenêtres (contexte d'empilement sur `.windows`, z-index 1 contre 2 pour la barre).
 - Fait : build de prod réparé avec `build.cssMinify: false` (lightningcss refusait `progress:not([value]):before:not([value])` dans `xp.css`). Alternative plus tard : `'esbuild'`, à installer.
-- En cours : ouverture en cascade.
+- Fait : cascade (`CASCADE_OFFSET = 25`, calculée avec `windows.length` avant le `push`). `getApp(id)` exportée par `apps.js`, seule source pour retrouver une app (titre, icône, futur composant) : le store ne copie pas `name`. Nettoyage : `toggle`, imports, `console.log`.
+- Reporté : `div` → `button` dans la barre des tâches (`xp.css` impose `button:not(:disabled).active`, qui écraserait notre classe `.active` : il faut d'abord travailler le CSS).
 - Reporté : `mousedown` des boutons de titre qui déclenche `startDrag` (la fenêtre suit la souris pendant l'appui, impossible d'annuler un clic). Correctif prévu : ignorer les boutons dans `startDrag` (`event.target.closest`), plutôt que `.stop`, qui empêcherait aussi `focusWindow`.
 - Plan jusqu'à dimanche : jeudi = build, boutons de titre, cascade, nettoyage, titre de fenêtre. Vendredi = apps via `<component :is>`, contenu des 4 apps, mise en ligne, horloge. Samedi = menu Démarrer simplifié + tests + correctifs. Le menu Démarrer est la seule tâche qu'on coupe en cas de retard.
 - Ouvert : menu Démarrer, horloge, composable `useDrag` (plus tard), nettoyage (`toogle`, imports inutilisés, `div` → `button` dans la barre), contenu réel des apps, hébergement.

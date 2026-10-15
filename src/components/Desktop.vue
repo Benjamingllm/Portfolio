@@ -1,9 +1,7 @@
 <script setup>
-import { ref } from 'vue'
 import icon from './Icon.vue'
 import { apps } from '../data/apps.js'
 import { useWindowsStore } from '../stores/windows.js'
-console.log(apps)
 const windowsStore = useWindowsStore()
 
 function openapp(app) {

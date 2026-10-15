@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import Desktop from './components/Desktop.vue'
 import taskbar from './components/taskbar.vue'
 import { useWindowsStore } from './stores/windows.js'
+import { getApp } from './data/apps.js'
 const windowsStore = useWindowsStore()
 const windowsArea = ref(null)
 // nombre de pixels de la fenêtre qui restent visibles au minimum (barre de titre attrapable)
@@ -44,7 +45,7 @@ function stopDrag() {
   <div class="windows" ref="windowsArea">
     <div v-for="(window, ) in windowsStore.windows" :class="{maximized: window.maximized }" :key="window.id" class="window" v-show="!window.minimized" v-bind:style="{ 'z-index': window.zIndex, 'top': window.y + 'px', 'left': window.x + 'px'}" @mousedown="windowsStore.focusWindow(window.id)">
       <div class="title-bar" @mousedown.prevent="startDrag(window.id, $event)">
-        <span class="title-bar-text">{{ window.id }}</span>
+        <span class="title-bar-text">{{ getApp(window.id).name }}</span>
           <div class="title-bar-controls">
               <button aria-label="Minimize" @click="windowsStore.minimizeWindow(window.id)"></button>
               <button :aria-label="window.maximized ? 'Restore' : 'Maximize'" @click="windowsStore.maximizeWindow(window.id)"></button>

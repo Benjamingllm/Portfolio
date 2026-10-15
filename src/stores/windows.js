@@ -5,6 +5,8 @@ export const useWindowsStore = defineStore('windows', () => {
   const windows= ref([])
   const topZ = ref(0)
   const activeId = ref(null)
+  // décalage en px entre deux fenêtres ouvertes à la suite (cascade XP)
+  const CASCADE_OFFSET = 25
 
 
   function focusWindow(appid) {
@@ -24,8 +26,6 @@ export const useWindowsStore = defineStore('windows', () => {
     if (win) {
       win.x = x
       win.y = y
-      //clamp limite le déplacement a la taille de l'écran et la barre des tache en hauteur
-      
     }
   }
 
@@ -44,7 +44,9 @@ export const useWindowsStore = defineStore('windows', () => {
     const win = !windows.value.some(app => app.id === appid)
 
     if (win) {
-      windows.value.push({ id: appid , zIndex: 0,x: 0, y: 0, minimized: false, maximized: false })
+      // +1 : la première fenêtre est déjà décalée du coin
+      const offset = (windows.value.length + 1) * CASCADE_OFFSET
+      windows.value.push({ id: appid , zIndex: 0, x: offset, y: offset, minimized: false, maximized: false })
       focusWindow(appid)
       return
     }
@@ -67,7 +69,7 @@ export const useWindowsStore = defineStore('windows', () => {
       activeId.value = null
   }
 
-  function toogleFromTaskbar(appid) {
+  function toggleFromTaskbar(appid) {
     const win = windows.value.find(window => window.id === appid)
     if (win) {
       if (win.minimized) {
@@ -81,5 +83,5 @@ export const useWindowsStore = defineStore('windows', () => {
     }
     }}
 
-  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toogleFromTaskbar, moveWindow,maximizeWindow}
+  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toggleFromTaskbar, moveWindow,maximizeWindow}
 })

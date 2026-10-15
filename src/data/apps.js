@@ -25,3 +25,8 @@ export const apps = [
 
 ]
 
+// retrouve l'app (name, icon...) à partir de l'id stocké dans une fenêtre
+export function getApp(id) {
+    return apps.find(app => app.id === id)
+}
+    

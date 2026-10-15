@@ -1,7 +1,6 @@
 <script setup>
 import { useWindowsStore } from '../stores/windows.js'
-import { ref } from 'vue'
-import { apps } from '../data/apps.js'
+import { getApp } from '../data/apps.js'
 const windowsStore = useWindowsStore()
 </script>
 <template>
@@ -11,8 +10,8 @@ const windowsStore = useWindowsStore()
             <span class="start-label">démarrer</span>
         </button>
         <div class="taskbar-icons" >
-            <div v-for="(window) in windowsStore.windows" :key="window.id" class="taskbar-icon" @click="windowsStore.toogleFromTaskbar(window.id)" :class="{ active: window.id === windowsStore.activeId }">
-                <img v-bind:src="apps.find(app => app.id === window.id).icon" alt="" />
+            <div v-for="(window) in windowsStore.windows" :key="window.id" class="taskbar-icon" @click="windowsStore.toggleFromTaskbar(window.id)" :class="{ active: window.id === windowsStore.activeId }">
+                <img v-bind:src="getApp(window.id).icon" alt="" />
             </div>
         </div>
     </div>
