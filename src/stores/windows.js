@@ -24,6 +24,8 @@ export const useWindowsStore = defineStore('windows', () => {
     if (win) {
       win.x = x
       win.y = y
+      //clamp limite le déplacement a la taille de l'écran et la barre des tache en hauteur
+      
     }
   }
 

@@ -7,7 +7,7 @@ Projet personnel de Benjamin, en 2e année d'école d'informatique. Objectif : a
 ## Contexte
 
 - Niveau : <à compléter : langages et outils déjà pratiqués>
-- Temps disponible : <à compléter : heures par semaine, échéance éventuelle>
+- Temps disponible : échéance dimanche 18/10/2026. Jeudi 15 soir 2 h, vendredi 16 5 h, samedi 17 2-3 h.
 - Machine : <à compléter : OS, éditeur, Claude Code en terminal / VS Code / appli>
 
 ## Stack
@@ -28,5 +28,10 @@ Mis à jour à la fin de chaque échange qui tranche quelque chose (2-3 lignes).
 
 - Décidé : empilement des fenêtres par `zIndex` explicite (+ compteur `topZ`), appliqué via `:style` sur des fenêtres en `position: absolute`. Store : `{ id, minimized, zIndex }` + `activeId`. Focus au `mousedown` sur la fenêtre (comportement XP, évite le conflit de bubbling avec les boutons de la barre de titre, base du futur drag). `activeId` remis à `null` quand on réduit/ferme (pas de réactivation auto). État actif de la barre des tâches via `:class`. Layout en flex colonne.
 - Décidé : drag par la barre de titre (offset calculé au `mousedown`, écouteurs `mousemove`/`mouseup` sur `document`), positions `x`/`y` dans le store via `moveWindow`.
-- En cours : fiabiliser le drag (clamp pour ne pas perdre une fenêtre hors écran, ouverture en cascade, `mousedown` des boutons de titre qui remonte jusqu'à `startDrag`). Barre des tâches, statut à confirmer : build de prod cassé (lightningcss refuse un sélecteur de `xp.css` → piste `build.cssMinify`), fenêtres pouvant passer devant la barre (contexte d'empilement sur `.windows`).
+- Fait : agrandir/restaurer (`maximized` dans le store, `maximizeWindow` bascule, classe `.maximized`, drag désactivé quand agrandie).
+- Fait (à tester dans le navigateur) : clamp dans `onDrag` (`App.vue`), bornes = taille mesurée de `.windows` via une ref de template, `MIN_VISIBLE = 40` px toujours visibles. La barre des tâches reste devant les fenêtres (contexte d'empilement sur `.windows`, z-index 1 contre 2 pour la barre).
+- Fait : build de prod réparé avec `build.cssMinify: false` (lightningcss refusait `progress:not([value]):before:not([value])` dans `xp.css`). Alternative plus tard : `'esbuild'`, à installer.
+- En cours : ouverture en cascade.
+- Reporté : `mousedown` des boutons de titre qui déclenche `startDrag` (la fenêtre suit la souris pendant l'appui, impossible d'annuler un clic). Correctif prévu : ignorer les boutons dans `startDrag` (`event.target.closest`), plutôt que `.stop`, qui empêcherait aussi `focusWindow`.
+- Plan jusqu'à dimanche : jeudi = build, boutons de titre, cascade, nettoyage, titre de fenêtre. Vendredi = apps via `<component :is>`, contenu des 4 apps, mise en ligne, horloge. Samedi = menu Démarrer simplifié + tests + correctifs. Le menu Démarrer est la seule tâche qu'on coupe en cas de retard.
 - Ouvert : menu Démarrer, horloge, composable `useDrag` (plus tard), nettoyage (`toogle`, imports inutilisés, `div` → `button` dans la barre), contenu réel des apps, hébergement.

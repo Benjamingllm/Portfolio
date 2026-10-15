@@ -4,6 +4,9 @@ import Desktop from './components/Desktop.vue'
 import taskbar from './components/taskbar.vue'
 import { useWindowsStore } from './stores/windows.js'
 const windowsStore = useWindowsStore()
+const windowsArea = ref(null)
+// nombre de pixels de la fenêtre qui restent visibles au minimum (barre de titre attrapable)
+const MIN_VISIBLE = 40
 let draggedId = null
 let offsetX = 0
 let offsetY = 0
@@ -22,9 +25,11 @@ function startDrag(id,event) {
 }
 
 function onDrag(event) {
-  
-  windowsStore.moveWindow(draggedId, event.clientX + offsetX, event.clientY + offsetY)
- 
+  const maxX = windowsArea.value.clientWidth - MIN_VISIBLE
+  const maxY = windowsArea.value.clientHeight - MIN_VISIBLE
+  const x = Math.min(maxX, Math.max(0, event.clientX + offsetX))
+  const y = Math.min(maxY, Math.max(0, event.clientY + offsetY))
+  windowsStore.moveWindow(draggedId, x, y)
 }
 
 function stopDrag() {
@@ -36,7 +41,7 @@ function stopDrag() {
 
 <template>
   
-  <div class="windows" >
+  <div class="windows" ref="windowsArea">
     <div v-for="(window, ) in windowsStore.windows" :class="{maximized: window.maximized }" :key="window.id" class="window" v-show="!window.minimized" v-bind:style="{ 'z-index': window.zIndex, 'top': window.y + 'px', 'left': window.x + 'px'}" @mousedown="windowsStore.focusWindow(window.id)">
       <div class="title-bar" @mousedown.prevent="startDrag(window.id, $event)">
         <span class="title-bar-text">{{ window.id }}</span>

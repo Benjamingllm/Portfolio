@@ -10,6 +10,10 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  build: {
+    // lightningcss (minifieur par défaut) refuse un sélecteur invalide de xp.css
+    cssMinify: false,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
