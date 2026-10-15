@@ -27,11 +27,22 @@ export const useWindowsStore = defineStore('windows', () => {
     }
   }
 
+  function maximizeWindow(appid) {
+    const win = windows.value.find(window => window.id === appid)
+    if (win) {
+      win.maximized = !win.maximized
+      activeId.value = appid
+    }
+  }
+
+
+
+
   function openWindow(appid) {
     const win = !windows.value.some(app => app.id === appid)
 
     if (win) {
-      windows.value.push({ id: appid , zIndex: 0,x: 0, y: 0, minimized: false})
+      windows.value.push({ id: appid , zIndex: 0,x: 0, y: 0, minimized: false, maximized: false })
       focusWindow(appid)
       return
     }
@@ -68,5 +79,5 @@ export const useWindowsStore = defineStore('windows', () => {
     }
     }}
 
-  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toogleFromTaskbar, moveWindow}
+  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toogleFromTaskbar, moveWindow,maximizeWindow}
 })

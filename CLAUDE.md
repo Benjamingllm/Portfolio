@@ -27,5 +27,6 @@ Vue 3 (`<script setup>`) + Vite, Pinia pour l'état, `xp.css` pour le style des 
 Mis à jour à la fin de chaque échange qui tranche quelque chose (2-3 lignes).
 
 - Décidé : empilement des fenêtres par `zIndex` explicite (+ compteur `topZ`), appliqué via `:style` sur des fenêtres en `position: absolute`. Store : `{ id, minimized, zIndex }` + `activeId`. Focus au `mousedown` sur la fenêtre (comportement XP, évite le conflit de bubbling avec les boutons de la barre de titre, base du futur drag). `activeId` remis à `null` quand on réduit/ferme (pas de réactivation auto). État actif de la barre des tâches via `:class`. Layout en flex colonne.
-- En cours : finir la barre des tâches : build de prod cassé (lightningcss refuse un sélecteur de `xp.css` → piste `build.cssMinify`), fenêtres pouvant passer devant la barre (contexte d'empilement sur `.windows`).
-- Ouvert : menu Démarrer, horloge, déplacement des fenêtres, nettoyage (`toogle`, imports inutilisés, `div` → `button` dans la barre), contenu réel des apps, hébergement.
+- Décidé : drag par la barre de titre (offset calculé au `mousedown`, écouteurs `mousemove`/`mouseup` sur `document`), positions `x`/`y` dans le store via `moveWindow`.
+- En cours : fiabiliser le drag (clamp pour ne pas perdre une fenêtre hors écran, ouverture en cascade, `mousedown` des boutons de titre qui remonte jusqu'à `startDrag`). Barre des tâches, statut à confirmer : build de prod cassé (lightningcss refuse un sélecteur de `xp.css` → piste `build.cssMinify`), fenêtres pouvant passer devant la barre (contexte d'empilement sur `.windows`).
+- Ouvert : menu Démarrer, horloge, composable `useDrag` (plus tard), nettoyage (`toogle`, imports inutilisés, `div` → `button` dans la barre), contenu réel des apps, hébergement.
