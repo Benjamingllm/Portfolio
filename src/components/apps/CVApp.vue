@@ -1,14 +1,48 @@
+<script setup>
+import { ref } from 'vue'
+
+// 1 = page entière, chaque pas agrandit les plafonds de l'image de 25 %
+const zoom = ref(1)
+
+function ZoomFw(){
+    if (zoom.value >=2){
+        return
+    }
+    zoom.value += 0.25
+
+
+}
+function ZoomBw(){
+    if (zoom.value <=1){
+        return
+    }
+    zoom.value -= 0.25
+}
+</script>
+
+
+
+
+
 <template>
     <div class="CV">
         <div class="toolbar">
-            <button class="toolButton">
-             <img src="/icons/Search.png" alt="" class="img">
-            </button><button class="toolButton">
-             <img src="/icons/Save.png" alt="" class="img">
+            <button class="toolButton"  @click="ZoomFw()">
+             <img src="/icons/IE Enlarge Image.png" alt="" class="img">
             </button>
+            <button class="toolButton" @click="ZoomBw()">
+             <img src="/icons/IE Shrink Image.png" alt="" class="img" >
+            </button>
+            <!-- Un lien, pas un bouton : seul un <a download> déclenche le téléchargement -->
+            <a class="toolButton" href="/cv/resumeMitchIvin.pdf" download="CV.pdf">
+             <img src="/icons/Save.png" alt="" class="img">
+            </a>
         </div>
         <div class="viewer">
-            <img src="/cv/resumeMitchIvin.jpg" alt="CV" class="page">
+            <img src="/cv/resumeMitchIvin.jpg" alt="CV" class="page" :style="{
+                'max-height': `calc(${zoom} * (100vh - var(--taskbar-height) - 64px))`,
+                'max-width': `calc(${zoom} * 90vw)`
+            }">
         </div>
     </div>
 </template>
@@ -43,9 +77,9 @@
     align-items: center;
     justify-content: center;
 }
+/* Les plafonds (max-height / max-width) sont dans le :style, car ils dépendent du zoom.
+   64px = barre de titre (28) + barre d'outils (32) + bordure basse de la fenêtre (3), arrondi. */
 .page{
-    display: block; 
-    max-height: calc(100vh - var(--taskbar-height) - 64px);
-    max-width: 90vw;
+    display: block;
 }
 </style>
