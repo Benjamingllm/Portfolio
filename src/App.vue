@@ -13,7 +13,7 @@ let offsetX = 0
 let offsetY = 0
 function startDrag(id,event) {
   const win = windowsStore.windows.find(w => w.id === id)
-  if (win.maximized) {
+  if (win.maximized || event.target.closest('button')) {
     return
   }
   draggedId = id
@@ -54,7 +54,7 @@ function stopDrag() {
       </div>
       <div class="window-body">
 
-        <p>Ma premiere fenêtre</p>
+        <component :is="getApp(window.id).component"></component>
       </div>
     </div>
 

@@ -1,22 +1,44 @@
 // Les icônes sont dans public/ : on les référence par leur chemin, sans import
-const folderClosed = '/icons/Folder Closed.png'
+import AboutApp from "@/components/apps/AboutApp.vue"
+import ProjectApp from "@/components/apps/ProjectApp.vue"
+import CVApp from "@/components/apps/CVApp.vue"
+import ContactApp from "@/components/apps/ContactApp.vue"
+const Accounts = '/icons/User Accounts.png'
+const Doc = '/icons/My Documents.png'
+const cv = '/icons/Generic Text Document.png'
+const contact ='/icons/Outlook Express.png'
 
 export const apps = [
     {
-        name: "Folder",
-        icon: folderClosed,
-        id:"folder",
+        name: "About",
+        icon: Accounts,
+        id:"about",
+        component : AboutApp
+
+    },
+    {
+        name: "Projets",
+        icon: Doc,
+        id:"projets",
+        component : ProjectApp
+
+    },
+    {
+        name: "CV",
+        icon: cv,
+        id:"cv",
+        component : CVApp
+
+    },
+    {
+        name: "Contact",
+        icon: contact,
+        id:"contact",
+        component : ContactApp
 
     },
 
-    {
-        name: "fichier",
-        icon: folderClosed,
-        id:"fichier",
-
-
-    }
-
+  
 
 
 
