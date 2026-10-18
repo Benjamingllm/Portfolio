@@ -92,7 +92,13 @@ function stopDrag() {
 }
 /* min-height: 0 autorise le corps à être plus petit que son contenu
    (sinon min-height: auto l'en empêche) ; le surplus défile. */
+/* Le corps est aussi une colonne flex qui prend la place restante :
+   une app peut ainsi remplir la fenêtre quand elle est agrandie (flex: 1 sur sa racine).
+   Base auto : fenêtre normale, le corps garde la taille de son contenu. */
 .window-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   min-height: 0;
   margin: 0;
   margin-left: 3px;
