@@ -1,17 +1,35 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useWindowsStore } from '../stores/windows.js'
 import { getApp } from '../data/apps.js'
+import StartMenu from './StartMenu.vue'
 const windowsStore = useWindowsStore()
+
+const menuOpen = ref(false)
+const startArea = ref(null)
+
+// un clic n'importe où hors du bouton et du menu le referme, comme sous XP
+function closeOnOutsideClick(event) {
+  if (menuOpen.value && !startArea.value.contains(event.target)) {
+    menuOpen.value = false
+  }
+}
+onMounted(() => document.addEventListener('mousedown', closeOnOutsideClick))
+onUnmounted(() => document.removeEventListener('mousedown', closeOnOutsideClick))
 </script>
 <template>
     <div class="taskbar">
-        <button class="start-button" type="button">
-            <span class="start-flag" aria-hidden="true"></span>
-            <span class="start-label">démarrer</span>
-        </button>
+        <div class="start-area" ref="startArea">
+            <button class="start-button" :class="{ open: menuOpen }" type="button" @click="menuOpen = !menuOpen">
+                <span class="start-flag" aria-hidden="true"></span>
+                <span class="start-label">démarrer</span>
+            </button>
+            <StartMenu v-if="menuOpen" @close="menuOpen = false" />
+        </div>
         <div class="taskbar-icons" >
-            <div v-for="(window) in windowsStore.windows" :key="window.id" class="taskbar-icon" @click="windowsStore.toggleFromTaskbar(window.id)" :class="{ active: window.id === windowsStore.activeId }">
-                <img v-bind:src="getApp(window.id).icon" alt="" />
+            <div v-for="win in windowsStore.windows" :key="win.id" class="taskbar-icon" @click="windowsStore.toggleFromTaskbar(win.id)" :class="{ active: win.id === windowsStore.activeId }">
+                <img :src="getApp(win.id).icon" alt="" />
+                <span>{{ getApp(win.id).name }}</span>
             </div>
         </div>
     </div>
@@ -82,7 +100,12 @@ const windowsStore = useWindowsStore()
     1px 0 3px rgba(0, 0, 0, 0.35);
 }
 
-.start-button:active {
+.start-area {
+  display: flex;
+}
+
+.start-button:active,
+.start-button.open {
   filter: brightness(0.88);
   box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
@@ -157,6 +180,12 @@ const windowsStore = useWindowsStore()
   flex-shrink: 0;
 }
 
+.taskbar-icon span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 @media (max-width: 560px) {
   .start-label {
     display: none;
@@ -171,6 +200,10 @@ const windowsStore = useWindowsStore()
     flex-basis: 30px;
     justify-content: center;
     padding: 0 4px;
+  }
+
+  .taskbar-icon span {
+    display: none;
   }
 }
 </style>

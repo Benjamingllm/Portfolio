@@ -69,6 +69,11 @@ export const useWindowsStore = defineStore('windows', () => {
       activeId.value = null
   }
 
+  function closeAllWindows() {
+    windows.value = []
+    activeId.value = null
+  }
+
   function toggleFromTaskbar(appid) {
     const win = windows.value.find(window => window.id === appid)
     if (win) {
@@ -83,5 +88,5 @@ export const useWindowsStore = defineStore('windows', () => {
     }
     }}
 
-  return { windows, openWindow, closeWindow, focusWindow, activeId, minimizeWindow ,toggleFromTaskbar, moveWindow,maximizeWindow}
+  return { windows, openWindow, closeWindow, closeAllWindows, focusWindow, activeId, minimizeWindow ,toggleFromTaskbar, moveWindow,maximizeWindow}
 })
