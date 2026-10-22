@@ -17,7 +17,7 @@ export const about = {
         },
         {
             title: "En dehors du code",
-            text: "Je joueaux jeux vidéo, ce qui explique en partie mon intérêt pour Unity, et je pratique la musculation, qui m'a appris à progresser un peu chaque semaine plutôt que tout d'un coup.",
+            text: "Je joue aux jeux vidéo, ce qui explique en partie mon intérêt pour Unity, et je pratique la musculation, qui m'a appris à progresser un peu chaque semaine plutôt que tout d'un coup.",
         },
     ],
 

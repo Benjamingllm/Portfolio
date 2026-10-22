@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 
+
     const FORMSPREE_URL = 'https://formspree.io/f/xbgdqwgj'
+    const LINKEDIN_URL = 'https://www.linkedin.com/in/benjamin-guillaume-51641338b/'
 
     const mail = ref('')
     const subject = ref('')
@@ -9,6 +11,17 @@ import { ref } from 'vue';
     // texte de la barre d'état, et verrou contre le double envoi
     const status = ref('Prêt')
     const sending = ref(false)
+
+    function clearForm() {
+        mail.value = ''
+        subject.value = ''
+        message.value = ''
+    }
+
+    function newMessage() {
+        clearForm()
+        status.value = 'Prêt'
+    }
 
     async function send() {
         if (sending.value) {
@@ -34,9 +47,7 @@ import { ref } from 'vue';
                 return
             }
             status.value = 'Message envoyé, merci !'
-            mail.value = ''
-            subject.value = ''
-            message.value = ''
+            clearForm()
         } catch (erreur) {
             status.value = 'Échec de l\'envoi : vérifiez votre connexion.'
         } finally {
@@ -55,14 +66,14 @@ import { ref } from 'vue';
                 <img src="/icons/OE Send.png" alt="" class="img" >
                 <span>Envoyer le message</span>
             </button>
-            <button class="toolButton">
+            <button class="toolButton" type="button" :disabled="sending" @click="newMessage()">
                 <img src="/icons/OE Create Mail.png" alt="" class="img">
                 <span>Nouveau message</span>
             </button>
             <span class="separator"></span>
-            <button class="toolButton">
+            <a v-if="LINKEDIN_URL" class="toolButton" :href="LINKEDIN_URL" target="_blank" rel="noopener" aria-label="LinkedIn">
                 <img src="/icons/linkedin.webp" alt="" class="img">
-            </button>
+            </a>
         </div>
 
         <form action="" id="mailing" @submit.prevent="send()">
