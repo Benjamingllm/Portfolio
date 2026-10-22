@@ -120,11 +120,7 @@ const windowsStore = useWindowsStore()
   min-width: 0;
   height: calc(var(--taskbar-height) - 8px);
   padding: 0 6px;
-  border: none;
   border-radius: 2px;
-  font: inherit;
-  color: #fff;
-  text-align: left;
   cursor: pointer;
   overflow: hidden;
   background: linear-gradient(
@@ -142,9 +138,6 @@ const windowsStore = useWindowsStore()
 
 .taskbar-icon:hover {
   filter: brightness(1.15);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.22);
 }
 
 .taskbar-icon:active,
@@ -164,12 +157,6 @@ const windowsStore = useWindowsStore()
   flex-shrink: 0;
 }
 
-.taskbar-icon span {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 @media (max-width: 560px) {
   .start-label {
     display: none;
@@ -184,10 +171,6 @@ const windowsStore = useWindowsStore()
     flex-basis: 30px;
     justify-content: center;
     padding: 0 4px;
-  }
-
-  .taskbar-icon span {
-    display: none;
   }
 }
 </style>

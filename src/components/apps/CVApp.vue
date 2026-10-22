@@ -39,7 +39,9 @@ function ZoomBw(){
             </a>
         </div>
         <div class="viewer">
-            <img src="/cv/resumeMitchIvin.jpg" alt="CV" class="page" :style="{
+            <!-- Plafonds dans le :style car ils dépendent du zoom.
+                 64px = barre de titre (28) + barre d'outils (32) + bordure basse de la fenêtre (3), arrondi. -->
+            <img src="/cv/resumeMitchIvin.jpg" alt="CV" :style="{
                 'max-height': `calc(${zoom} * (100vh - var(--taskbar-height) - 64px))`,
                 'max-width': `calc(${zoom} * 90vw)`
             }">
@@ -49,7 +51,6 @@ function ZoomBw(){
 
 
 <style scoped>
-/* Barre d'outils : les boutons en ligne, centrés verticalement */
 .toolbar{
     display: flex;
     align-items: center;
@@ -76,10 +77,5 @@ function ZoomBw(){
     display: flex;
     align-items: center;
     justify-content: center;
-}
-/* Les plafonds (max-height / max-width) sont dans le :style, car ils dépendent du zoom.
-   64px = barre de titre (28) + barre d'outils (32) + bordure basse de la fenêtre (3), arrondi. */
-.page{
-    display: block;
 }
 </style>

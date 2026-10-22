@@ -83,18 +83,13 @@ function stopDrag() {
   top: 0;
   left: 0;
   pointer-events: auto;
-  /* Colonne flex : la barre de titre garde sa hauteur, le corps prend le reste.
-     La fenêtre suit son contenu mais ne dépasse pas la zone (.windows a une vraie taille). */
   display: flex;
   flex-direction: column;
   max-width: 100%;
   max-height: 100%;
 }
-/* min-height: 0 autorise le corps à être plus petit que son contenu
-   (sinon min-height: auto l'en empêche) ; le surplus défile. */
-/* Le corps est aussi une colonne flex qui prend la place restante :
-   une app peut ainsi remplir la fenêtre quand elle est agrandie (flex: 1 sur sa racine).
-   Base auto : fenêtre normale, le corps garde la taille de son contenu. */
+/* Colonne flex pour qu'une app puisse remplir la fenêtre agrandie (flex: 1 sur sa racine).
+   min-height: 0, sinon le corps refuse d'être plus petit que son contenu et ne défile pas. */
 .window-body {
   display: flex;
   flex-direction: column;

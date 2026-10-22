@@ -6,8 +6,16 @@ import { ref } from 'vue';
     const mail = ref('')
     const subject = ref('')
     const message = ref('')
+    // texte de la barre d'état, et verrou contre le double envoi
+    const status = ref('Prêt')
+    const sending = ref(false)
 
     async function send() {
+        if (sending.value) {
+            return
+        }
+        sending.value = true
+        status.value = 'Envoi du message...'
         try {
             const reponse = await fetch(FORMSPREE_URL, {
                 method: 'POST',
@@ -22,12 +30,17 @@ import { ref } from 'vue';
                 }),
             })
             if (!reponse.ok) {
-                console.log('erreur serveur :', reponse.status)
+                status.value = `Échec de l'envoi (erreur ${reponse.status}), réessayez.`
                 return
             }
-            console.log('envoyé')
+            status.value = 'Message envoyé, merci !'
+            mail.value = ''
+            subject.value = ''
+            message.value = ''
         } catch (erreur) {
-            console.log('erreur réseau :', erreur)
+            status.value = 'Échec de l\'envoi : vérifiez votre connexion.'
+        } finally {
+            sending.value = false
         }
     }
 
@@ -38,7 +51,7 @@ import { ref } from 'vue';
 <template>
     <div class="Contact">
         <div class="toolbar">
-            <button class="toolButton" type="submit" form="mailing" >
+            <button class="toolButton" type="submit" form="mailing" :disabled="sending">
                 <img src="/icons/OE Send.png" alt="" class="img" >
                 <span>Envoyer le message</span>
             </button>
@@ -69,7 +82,7 @@ import { ref } from 'vue';
         </form>
 
         <div class="status-bar">
-            <p class="status-bar-field">Prêt</p>
+            <p class="status-bar-field">{{ status }}</p>
         </div>
     </div>
 </template>
@@ -78,7 +91,6 @@ import { ref } from 'vue';
 <style scoped>
 
 .Contact{
-    box-sizing: border-box;
     width: 100%;
     min-width: min(560px, 90vw);
     display: flex;
@@ -107,13 +119,17 @@ import { ref } from 'vue';
     padding: 0.2em 0.5em;
     color: #555;
 }
+.toolButton:disabled img{
+    filter: grayscale(1);
+    opacity: 0.5;
+}
 .img{
     width: 28px;
     height: 28px;
 }
 .separator{
     width: 1px;
-    align-self: stretch; /* hauteur de la barre, quelle qu'elle soit */
+    align-self: stretch;
     margin: 0 0.5em;
     background-color: #c5c2b2;
     box-shadow: 1px 0 #fff;
@@ -130,13 +146,11 @@ form{
     width: 4em;
     flex-shrink: 0;
     text-align: right;
-    justify-content: right;
 }
 
 .input{
     flex: 1;
-    min-width: 0; 
-    box-sizing: border-box;
+    min-width: 0;
     height: 2.4em;
     padding: 0.3em 0.5em;
     border: 2px solid;
@@ -156,8 +170,7 @@ form{
     overflow-wrap: anywhere;
     background-color: #ece9d8;
 }
-/* Dernier maillon : prend toute la hauteur restante de la fenêtre.
-   12em = hauteur idéale en fenêtre normale ; 8em = minimum utilisable. */
+/* 12em en fenêtre normale, toute la hauteur restante quand elle est agrandie */
 .message{
     flex: 1 1 12em;
     min-height: 8em;

@@ -93,7 +93,6 @@
 
 <style scoped>
 .ProjetApp{
-    box-sizing: border-box;
     width: 100%;
     min-width: min(560px, 90vw);
     display: flex;
@@ -166,8 +165,7 @@
     height: 16px;
 }
 
-/* Volet bleu à gauche + zone blanche à droite, sur toute la hauteur restante.
-   Fenêtre trop étroite : flex-wrap fait passer le volet au-dessus du contenu. */
+/* fenêtre trop étroite : le volet passe au-dessus du contenu */
 .main{
     flex: 1 1 auto;
     min-height: 16em;
@@ -238,7 +236,6 @@
     justify-content: center;
     align-items: flex-start;
 }
-/* la capture ne dépasse jamais la largeur de la zone */
 .capture{
     max-width: 100%;
     height: auto;
@@ -260,7 +257,6 @@
     text-align: center;
     cursor: default;
 }
-/* la taille de l'icône est fixée ici : sans ça l'image s'affiche à sa taille réelle */
 .folderIcon{
     width: 48px;
     height: 48px;

@@ -18,11 +18,12 @@ function openapp(app) {
   background-image:url(../assets/img/background-image.jpg);}
 .grid {
   display: grid;
-  height: 100%;                                /* occupe toute la hauteur du bureau */
-  grid-auto-flow: column;                      /* remplit de haut en bas, puis colonne suivante */
-  grid-template-rows: repeat(auto-fill, 90px); /* autant de lignes de 90px qu'il en rentre */
-  grid-auto-columns: 80px;                     /* largeur de chaque colonne créée */
-  gap: 8px;                                    /* espace entre les cellules */
+  height: 100%;
+  /* comme XP : les icônes remplissent la colonne de haut en bas avant d'en ouvrir une nouvelle */
+  grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fill, 90px);
+  grid-auto-columns: 80px;
+  gap: 8px;
 }
 </style>
 

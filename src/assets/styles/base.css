@@ -1,18 +1,14 @@
-/* Variables globales, utilisables partout avec var(--nom) */
 :root {
-  --taskbar-height: 30px; /* hauteur de la future barre des tâches */
+  --taskbar-height: 30px;
 }
 
-/* La largeur d'un élément inclut son padding et sa bordure :
-   un élément de 100 px fait vraiment 100 px */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Le bureau occupe tout l'écran : pas de marge par défaut du navigateur,
-   et jamais de barre de défilement sur la page elle-même */
+/* la page ne défile jamais : ce sont les fenêtres qui gèrent leur propre défilement */
 html,
 body {
   margin: 0;
