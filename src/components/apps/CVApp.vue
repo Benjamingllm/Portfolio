@@ -34,14 +34,14 @@ function ZoomBw(){
              <img src="/icons/IE Shrink Image.png" alt="" class="img" >
             </button>
             <!-- Un lien, pas un bouton : seul un <a download> déclenche le téléchargement -->
-            <a class="toolButton" href="/cv/resumeMitchIvin.pdf" download="CV.pdf">
+            <a class="toolButton" href="/cv/CV.pdf" download="CV.pdf">
              <img src="/icons/Save.png" alt="" class="img">
             </a>
         </div>
         <div class="viewer">
             <!-- Plafonds dans le :style car ils dépendent du zoom.
                  64px = barre de titre (28) + barre d'outils (32) + bordure basse de la fenêtre (3), arrondi. -->
-            <img src="/cv/resumeMitchIvin.jpg" alt="CV" :style="{
+            <img src="/cv/CV.jpg" alt="CV" :style="{
                 'max-height': `calc(${zoom} * (100vh - var(--taskbar-height) - 64px))`,
                 'max-width': `calc(${zoom} * 90vw)`
             }">

@@ -4,7 +4,6 @@
     import TaskPanelSection from '@/components/TaskPanelSection.vue';
 
     const windowsStore = useWindowsStore()
-    const DEFAULT_PHOTO = '/icons/User Accounts.png'
 
 </script>
 
@@ -54,7 +53,7 @@
 
             <div class="content">
                 <div class="profile">
-                    <img :src="about.photo || DEFAULT_PHOTO" :alt="`Photo de ${about.name}`" class="photo">
+                    <img :src="about.photo" :alt="`Photo de ${about.name}`" class="photo">
                     <div>
                         <h1 class="name">{{ about.name }}</h1>
                         <p class="title">{{ about.title }}</p>

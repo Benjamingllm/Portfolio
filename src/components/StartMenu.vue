@@ -2,18 +2,14 @@
 import { apps } from '../data/apps.js'
 import { about } from '../data/about.js'
 import { useWindowsStore } from '../stores/windows.js'
+import { useSessionStore } from '../stores/session.js'
 
 const emit = defineEmits(['close'])
 const windowsStore = useWindowsStore()
-const DEFAULT_PHOTO = '/icons/User Accounts.png'
+const session = useSessionStore()
 
 function openApp(id) {
   windowsStore.openWindow(id)
-  emit('close')
-}
-
-function closeAll() {
-  windowsStore.closeAllWindows()
   emit('close')
 }
 </script>
@@ -21,7 +17,7 @@ function closeAll() {
 <template>
   <div class="start-menu">
     <div class="menu-header">
-      <img :src="about.photo || DEFAULT_PHOTO" alt="" class="menu-photo">
+      <img :src="about.photo" alt="" class="menu-photo">
       <span>{{ about.name }}</span>
     </div>
 
@@ -48,9 +44,9 @@ function closeAll() {
     </div>
 
     <div class="menu-footer">
-      <button class="menu-item footer-item" type="button" @click="closeAll()">
+      <button class="menu-item footer-item" type="button" @click="session.logout()">
         <img src="/icons/Logout.png" alt="">
-        <span>Tout fermer</span>
+        <span>Fermer la session</span>
       </button>
     </div>
   </div>

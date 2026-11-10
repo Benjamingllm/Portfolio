@@ -2,9 +2,12 @@
 import { ref } from 'vue'
 import Desktop from './components/Desktop.vue'
 import taskbar from './components/taskbar.vue'
+import LoginScreen from './components/LoginScreen.vue'
 import { useWindowsStore } from './stores/windows.js'
+import { useSessionStore } from './stores/session.js'
 import { getApp } from './data/apps.js'
 const windowsStore = useWindowsStore()
+const session = useSessionStore()
 const windowsArea = ref(null)
 // nombre de pixels de la fenêtre qui restent visibles au minimum (barre de titre attrapable)
 const MIN_VISIBLE = 40
@@ -41,7 +44,9 @@ function stopDrag() {
 </script>
 
 <template>
-  
+  <LoginScreen v-if="!session.loggedIn" @login="session.login()" />
+
+  <template v-else>
   <div class="windows" ref="windowsArea">
     <div v-for="(window, ) in windowsStore.windows" :class="{maximized: window.maximized }" :key="window.id" class="window" v-show="!window.minimized" v-bind:style="{ 'z-index': window.zIndex, 'top': window.y + 'px', 'left': window.x + 'px'}" @mousedown="windowsStore.focusWindow(window.id)">
       <div class="title-bar" @mousedown.prevent="startDrag(window.id, $event)">
@@ -62,7 +67,7 @@ function stopDrag() {
   </div>
   <Desktop />
   <taskbar />
-
+  </template>
 </template>
 
 <style scoped>
