@@ -22,15 +22,6 @@
             <button class="toolButton" :disabled="!selected" @click="selected = null">
                 <img src="/icons/Up.png" alt="" class="toolIcon">
             </button>
-            <span class="separator"></span>
-            <button class="toolButton">
-                <img src="/icons/Search.png" alt="" class="toolIcon">
-                <span>Rechercher</span>
-            </button>
-            <button class="toolButton">
-                <img src="/icons/Folder View.png" alt="" class="toolIcon">
-                <span>Dossiers</span>
-            </button>
         </div>
 
         <div class="addressBar">
@@ -128,13 +119,6 @@
 .toolIcon{
     width: 24px;
     height: 24px;
-}
-.separator{
-    width: 1px;
-    align-self: stretch;
-    margin: 0 0.3em;
-    background-color: #c5c2b2;
-    box-shadow: 1px 0 #fff;
 }
 
 .addressBar{
