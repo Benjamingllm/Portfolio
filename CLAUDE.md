@@ -41,5 +41,6 @@ Mis à jour à la fin de chaque échange qui tranche quelque chose (2-3 lignes).
 - Fait : menu Démarrer (`StartMenu.vue`, contenu lu dans `apps.js` et `about.js`, fermeture au clic extérieur via `.start-area` + `contains()`, « Tout fermer » = `closeAllWindows` du store). Noms des apps dans la barre des tâches (masqués sous 560 px).
 - Décidé : commentaires qui disent *pourquoi*, pas *ce que fait le langage*. Pas de bouton mort : un bouton est branché ou `disabled`.
 - Fait : README (aperçu dans `docs/apercu.jpg`), `index.html` (titre, `lang="fr"`, description), `.claude/` sorti du dépôt (ignoré par git), 477 icônes inutilisées retirées de `public/icons` (24 gardées).
+- Décidé : pas de lien vers l'appli Tanafit (`link: null` dans `projects.js`) tant qu'elle n'a pas de login.
 - Ouvert, par priorité : 2-3 projets + photo ; favicon ; mobile simple (tap, fenêtres agrandies) ; mise en ligne (Netlify ou Vercel) ; boutons morts de Projets (Rechercher, Dossiers, Dossier parent) ; horloge.
 - Dette : `AppWindow.vue` à sortir de `App.vue`, barre d'outils copiée dans 4 apps, `windows.value.find` répété dans le store, nommage incohérent (`taskbar.vue`, classes `.CV`/`.Contact`/`.ProjetApp`), `div` → `button` dans la barre.

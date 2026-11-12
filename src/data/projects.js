@@ -7,7 +7,8 @@ export const projects =  [
         description: "application de suivie de séances de musculations",
         stack: ['Tailwind','Vue','N8N'],
         image: '/img/tanafit.png',
-        link : 'https://tanafit.tanaverse.fr',
+        // pas de lien tant que l'appli n'a pas de login : ses données seraient accessibles à tous
+        link : null,
         github : null
 
 
