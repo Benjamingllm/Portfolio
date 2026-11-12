@@ -4,10 +4,8 @@
     import TaskPanelSection from '@/components/TaskPanelSection.vue';
     import { isTouch } from '@/utils/touch';
 
-    // null = on affiche la grille ; un projet = on affiche son détail
     const selected = ref(null)
 
-    // même règle que les icônes du bureau : au doigt, un tap simple ouvre le dossier
     function onClick(project) {
         if (isTouch()) {
             selected.value = project
@@ -119,7 +117,6 @@
     min-width: 0;
     padding: 0.2em 0.4em;
 }
-/* xp.css grise le texte des boutons désactivés, on grise aussi l'icône */
 .toolButton:disabled img{
     filter: grayscale(1);
     opacity: 0.5;
@@ -157,7 +154,6 @@
     height: 16px;
 }
 
-/* fenêtre trop étroite : le volet passe au-dessus du contenu */
 .main{
     flex: 1 1 auto;
     min-height: 16em;
@@ -165,8 +161,6 @@
     flex-wrap: wrap;
 }
 
-/* flex-grow 1 contre 999 : le volet garde ~200px tant qu'il partage la ligne,
-   et prend toute la largeur quand il passe au-dessus */
 .taskPanel{
     flex: 1 1 200px;
     padding: 0.8em;
@@ -203,7 +197,6 @@
 .detailsName{
     font-weight: bold;
 }
-/* les 11px de xp.css sont trop petits pour un paragraphe */
 .description{
     font-size: 12px;
     line-height: 1.4;

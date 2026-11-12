@@ -116,7 +116,6 @@
     box-shadow: 1px 0 #fff;
 }
 
-/* fenêtre trop étroite : le volet passe au-dessus du contenu */
 .main{
     flex: 1 1 auto;
     min-height: 20em;
@@ -183,7 +182,6 @@ a.task:hover{
     object-fit: cover;
     border: 1px solid #c5c2b2;
 }
-/* xp.css met des h1/h2 énormes (5rem / 2.5rem) */
 .name{
     margin: 0;
     font-size: 20px;

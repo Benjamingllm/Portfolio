@@ -16,7 +16,6 @@ import { isTouch } from '@/utils/touch'
 
 const emit = defineEmits(['select', 'open'])
 
-// Au doigt, le double tap zoome au lieu de déclencher dblclick : un tap simple ouvre l'app.
 function onClick() {
     emit('select')
     if (isTouch()) {

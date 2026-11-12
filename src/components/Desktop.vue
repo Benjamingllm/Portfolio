@@ -19,7 +19,6 @@ function openapp(app) {
 .grid {
   display: grid;
   height: 100%;
-  /* comme XP : les icônes remplissent la colonne de haut en bas avant d'en ouvrir une nouvelle */
   grid-auto-flow: column;
   grid-template-rows: repeat(auto-fill, 90px);
   grid-auto-columns: 80px;

@@ -9,7 +9,6 @@ export const useSessionStore = defineStore('session', () => {
     loggedIn.value = true
   }
 
-  // les fenêtres sont dans le store, pas dans le bureau : v-if ne suffit pas à les fermer
   function logout() {
     useWindowsStore().closeAllWindows()
     loggedIn.value = false

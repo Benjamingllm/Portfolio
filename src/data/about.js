@@ -1,9 +1,6 @@
-// Tes infos, utilisées par About, le menu Démarrer et l'écran de connexion : modifier ici seulement
-// url: null = le lien n'est pas affiché
 export const about = {
     name: "Benjamin Guillaume",
     title: "Étudiant en 2e année d'informatique",
-    // remplacer par ta photo, à mettre dans public/img/
     photo: "/icons/User Accounts.png",
     lookingFor: "À la recherche d'un stage / d'une alternance",
 

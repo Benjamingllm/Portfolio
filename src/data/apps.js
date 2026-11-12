@@ -1,4 +1,3 @@
-// Les icônes sont dans public/ : on les référence par leur chemin, sans import
 import AboutApp from "@/components/apps/AboutApp.vue"
 import ProjectApp from "@/components/apps/ProjectApp.vue"
 import CVApp from "@/components/apps/CVApp.vue"
@@ -47,7 +46,6 @@ export const apps = [
 
 ]
 
-// retrouve l'app (name, icon...) à partir de l'id stocké dans une fenêtre
 export function getApp(id) {
     return apps.find(app => app.id === id)
 }

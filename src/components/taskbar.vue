@@ -8,7 +8,6 @@ const windowsStore = useWindowsStore()
 const menuOpen = ref(false)
 const startArea = ref(null)
 
-// un clic n'importe où hors du bouton et du menu le referme, comme sous XP
 function closeOnOutsideClick(event) {
   if (menuOpen.value && !startArea.value.contains(event.target)) {
     menuOpen.value = false
@@ -60,8 +59,6 @@ onUnmounted(() => document.removeEventListener('mousedown', closeOnOutsideClick)
   box-shadow: inset 0 1px 0 #6ba8f7;
 }
 
-/* xp.css peint tous les <button> : bord, fond et ombres de survol
-   doivent être neutralisés avant de repeindre les nôtres. */
 .start-button {
   display: flex;
   align-items: center;

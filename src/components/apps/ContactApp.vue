@@ -8,7 +8,6 @@ import { ref } from 'vue';
     const mail = ref('')
     const subject = ref('')
     const message = ref('')
-    // texte de la barre d'état, et verrou contre le double envoi
     const status = ref('Prêt')
     const sending = ref(false)
 
@@ -181,7 +180,6 @@ form{
     overflow-wrap: anywhere;
     background-color: #ece9d8;
 }
-/* 12em en fenêtre normale, toute la hauteur restante quand elle est agrandie */
 .message{
     flex: 1 1 12em;
     min-height: 8em;

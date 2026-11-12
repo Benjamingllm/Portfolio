@@ -99,7 +99,6 @@ function openApp(id) {
   border-left: 1px solid #95bdee;
 }
 
-/* xp.css peint aussi ces <button> : même neutralisation que le bouton démarrer */
 .menu-item {
   display: flex;
   align-items: center;

@@ -6,7 +6,6 @@ export const useWindowsStore = defineStore('windows', () => {
   const windows= ref([])
   const topZ = ref(0)
   const activeId = ref(null)
-  // décalage en px entre deux fenêtres ouvertes à la suite (cascade XP)
   const CASCADE_OFFSET = 25
 
 
@@ -45,10 +44,7 @@ export const useWindowsStore = defineStore('windows', () => {
     const win = !windows.value.some(app => app.id === appid)
 
     if (win) {
-      // +1 : la première fenêtre est déjà décalée du coin
       const offset = (windows.value.length + 1) * CASCADE_OFFSET
-      // Sur un téléphone, une fenêtre flottante ne tient pas : elle s'ouvre agrandie
-      // (et reste restaurable, x/y gardent la position de cascade).
       windows.value.push({ id: appid , zIndex: 0, x: offset, y: offset, minimized: false, maximized: isTouch() })
       focusWindow(appid)
       return

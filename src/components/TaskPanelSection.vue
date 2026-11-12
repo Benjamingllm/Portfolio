@@ -1,5 +1,4 @@
 <script setup>
-// Un encadré du volet bleu de l'Explorateur XP : un titre + le contenu passé en slot
 defineProps({
     title: {
         type: String,

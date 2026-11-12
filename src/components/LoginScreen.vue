@@ -5,7 +5,6 @@ import { about } from '../data/about.js'
 const emit = defineEmits(['login'])
 const WELCOME_DELAY = 1000
 
-// état propre à l'écran : le reste de l'appli n'a besoin de savoir que "connecté ou pas"
 const welcome = ref(false)
 let timer = null
 
@@ -66,7 +65,6 @@ onUnmounted(() => clearTimeout(timer))
 .band-top {
   border-bottom: 2px solid #7a96df;
 }
-/* le liseré orange du bas de l'écran XP */
 .band-bottom {
   border-top: 2px solid transparent;
   border-image: linear-gradient(to right, #00309c, #f99736 50%, #00309c) 1;
@@ -119,7 +117,6 @@ onUnmounted(() => clearTimeout(timer))
   flex: 0 1 300px;
 }
 
-/* xp.css peint les <button> : on repart d'une vignette nue */
 .user {
   display: flex;
   align-items: center;

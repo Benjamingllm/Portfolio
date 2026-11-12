@@ -8,7 +8,6 @@
   box-sizing: border-box;
 }
 
-/* la page ne défile jamais : ce sont les fenêtres qui gèrent leur propre défilement */
 html,
 body {
   margin: 0;
