@@ -2,9 +2,17 @@
     import { projects } from '@/data/projects';
     import { ref } from 'vue';
     import TaskPanelSection from '@/components/TaskPanelSection.vue';
+    import { isTouch } from '@/utils/touch';
 
     // null = on affiche la grille ; un projet = on affiche son détail
     const selected = ref(null)
+
+    // même règle que les icônes du bureau : au doigt, un tap simple ouvre le dossier
+    function onClick(project) {
+        if (isTouch()) {
+            selected.value = project
+        }
+    }
 
 </script>
 
@@ -67,7 +75,7 @@
             </div>
 
             <div v-else class="content grid">
-                <div class="item" v-for="project in projects" :key="project.id" @dblclick="selected = project">
+                <div class="item" v-for="project in projects" :key="project.id" @click="onClick(project)" @dblclick="selected = project">
                     <img src="/icons/Folder Closed.png" alt="" class="folderIcon">
                     <p>{{ project.name }}</p>
                 </div>

@@ -43,5 +43,6 @@ Mis à jour à la fin de chaque échange qui tranche quelque chose (2-3 lignes).
 - Fait : README (aperçu dans `docs/apercu.jpg`), `index.html` (titre, `lang="fr"`, description), `.claude/` sorti du dépôt (ignoré par git), 477 icônes inutilisées retirées de `public/icons` (24 gardées).
 - Décidé : pas de lien vers l'appli Tanafit (`link: null` dans `projects.js`) tant qu'elle n'a pas de login.
 - Fait : favicon (`public/favicon.png`, icône User Accounts réduite en 48 px ; l'ancien `favicon.ico` de Vue retiré). Boutons Rechercher et Dossiers retirés de Projets, avec leurs icônes ; « Dossier parent » était déjà branché. Site déjà en ligne.
-- Ouvert, par priorité : mobile simple (tap, fenêtres agrandies) ; 2-3 projets + photo ; horloge.
+- Fait (à tester sur vrai téléphone) : mobile. `isTouch()` dans `src/utils/touch.js` (`pointer: coarse`) : tap simple ouvre l'app (`Icon.vue`), fenêtres ouvertes agrandies (`openWindow`). Drag et focus passés aux pointer events (`pointerdown/move/up/cancel`), `@mousedown.prevent` remplacé par `user-select: none` + `touch-action: none` sur `.title-bar`.
+- Ouvert, par priorité : tester le mobile ; boutons de titre plus gros au doigt ; 2-3 projets + photo ; horloge.
 - Dette : `AppWindow.vue` à sortir de `App.vue`, barre d'outils copiée dans 4 apps, `windows.value.find` répété dans le store, nommage incohérent (`taskbar.vue`, classes `.CV`/`.Contact`/`.ProjetApp`), `div` → `button` dans la barre.

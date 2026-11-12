@@ -23,9 +23,11 @@ function startDrag(id,event) {
   
   offsetX =  win.x - event.clientX 
   offsetY =  win.y -  event.clientY 
-  document.addEventListener('mousemove', onDrag)
-  
-  document.addEventListener('mouseup', stopDrag)
+  // Pointer events : un seul code pour la souris et le doigt.
+  // pointercancel : le navigateur peut interrompre un geste tactile (appel, rotation...).
+  document.addEventListener('pointermove', onDrag)
+  document.addEventListener('pointerup', stopDrag)
+  document.addEventListener('pointercancel', stopDrag)
 }
 
 function onDrag(event) {
@@ -37,8 +39,9 @@ function onDrag(event) {
 }
 
 function stopDrag() {
-  document.removeEventListener('mousemove', onDrag)
-  document.removeEventListener('mouseup', stopDrag)
+  document.removeEventListener('pointermove', onDrag)
+  document.removeEventListener('pointerup', stopDrag)
+  document.removeEventListener('pointercancel', stopDrag)
   draggedId = null
 }
 </script>
@@ -48,8 +51,8 @@ function stopDrag() {
 
   <template v-else>
   <div class="windows" ref="windowsArea">
-    <div v-for="(window, ) in windowsStore.windows" :class="{maximized: window.maximized }" :key="window.id" class="window" v-show="!window.minimized" v-bind:style="{ 'z-index': window.zIndex, 'top': window.y + 'px', 'left': window.x + 'px'}" @mousedown="windowsStore.focusWindow(window.id)">
-      <div class="title-bar" @mousedown.prevent="startDrag(window.id, $event)">
+    <div v-for="(window, ) in windowsStore.windows" :class="{maximized: window.maximized }" :key="window.id" class="window" v-show="!window.minimized" v-bind:style="{ 'z-index': window.zIndex, 'top': window.y + 'px', 'left': window.x + 'px'}" @pointerdown="windowsStore.focusWindow(window.id)">
+      <div class="title-bar" @pointerdown="startDrag(window.id, $event)">
         <span class="title-bar-text">{{ getApp(window.id).name }}</span>
           <div class="title-bar-controls">
               <button aria-label="Minimize" @click="windowsStore.minimizeWindow(window.id)"></button>
@@ -104,6 +107,13 @@ function stopDrag() {
   margin-left: 3px;
   margin-right: 3px;
   overflow: auto;
+}
+/* Remplace l'ancien @mousedown.prevent : bloquer pointerdown supprimerait aussi
+   les mousedown simulés dont dépend la fermeture du menu Démarrer.
+   touch-action: none, sinon le navigateur fait défiler la page au lieu de laisser glisser la fenêtre. */
+.title-bar {
+  user-select: none;
+  touch-action: none;
 }
 .maximized {
   top: 0 !important;

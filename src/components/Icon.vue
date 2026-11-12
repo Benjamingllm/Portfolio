@@ -12,7 +12,17 @@ defineProps({
 
 })
 
+import { isTouch } from '@/utils/touch'
+
 const emit = defineEmits(['select', 'open'])
+
+// Au doigt, le double tap zoome au lieu de déclencher dblclick : un tap simple ouvre l'app.
+function onClick() {
+    emit('select')
+    if (isTouch()) {
+        emit('open')
+    }
+}
 </script>
 <style scoped>
 .icon_image {
@@ -40,7 +50,7 @@ p {
 }
 </style>
 <template>
-    <div class="icon"  @click="emit('select')" @dblclick="emit('open')">
+    <div class="icon"  @click="onClick" @dblclick="emit('open')">
         <img v-bind:src="image" alt="" class="icon_image">
         <p>{{ name }}</p>
         
