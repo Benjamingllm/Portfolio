@@ -1,9 +1,11 @@
 <script setup>
-    import { projects } from '@/data/projects';
     import { ref } from 'vue';
+    import { storeToRefs } from 'pinia';
+    import { useContentStore } from '@/stores/content.js';
     import TaskPanelSection from '@/components/TaskPanelSection.vue';
     import { isTouch } from '@/utils/touch';
 
+    const { projects } = storeToRefs(useContentStore())
     const selected = ref(null)
 
     function onClick(project) {

@@ -1,8 +1,10 @@
 <script setup>
 import { ref, onUnmounted } from 'vue'
-import { about } from '../data/about.js'
+import { storeToRefs } from 'pinia'
+import { useContentStore } from '../stores/content.js'
 
 const emit = defineEmits(['login'])
+const { about } = storeToRefs(useContentStore())
 const WELCOME_DELAY = 1000
 
 const welcome = ref(false)

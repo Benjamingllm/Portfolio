@@ -1,12 +1,14 @@
 <script setup>
 import { apps } from '../data/apps.js'
-import { about } from '../data/about.js'
+import { storeToRefs } from 'pinia'
+import { useContentStore } from '../stores/content.js'
 import { useWindowsStore } from '../stores/windows.js'
 import { useSessionStore } from '../stores/session.js'
 
 const emit = defineEmits(['close'])
 const windowsStore = useWindowsStore()
 const session = useSessionStore()
+const { about } = storeToRefs(useContentStore())
 
 function openApp(id) {
   windowsStore.openWindow(id)

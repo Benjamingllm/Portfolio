@@ -5,8 +5,10 @@ import LoginScreen from './components/LoginScreen.vue'
 import AppWindow from './components/AppWindow.vue'
 import { useWindowsStore } from './stores/windows.js'
 import { useSessionStore } from './stores/session.js'
+import { useContentStore } from './stores/content.js'
 const windowsStore = useWindowsStore()
 const session = useSessionStore()
+useContentStore().load()
 </script>
 
 <template>

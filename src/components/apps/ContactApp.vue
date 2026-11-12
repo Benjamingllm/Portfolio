@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useContentStore } from '@/stores/content.js';
 
-
-    const FORMSPREE_URL = 'https://formspree.io/f/xbgdqwgj'
-    const LINKEDIN_URL = 'https://www.linkedin.com/in/benjamin-guillaume-51641338b/'
+    const { contact } = storeToRefs(useContentStore())
 
     const mail = ref('')
     const subject = ref('')
@@ -29,7 +29,7 @@ import { ref } from 'vue';
         sending.value = true
         status.value = 'Envoi du message...'
         try {
-            const reponse = await fetch(FORMSPREE_URL, {
+            const reponse = await fetch(contact.value.formspree, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ import { ref } from 'vue';
                 <span>Nouveau message</span>
             </button>
             <span class="separator"></span>
-            <a v-if="LINKEDIN_URL" class="toolButton" :href="LINKEDIN_URL" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <a v-if="contact.linkedin" class="toolButton" :href="contact.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
                 <img src="/icons/linkedin.webp" alt="" class="img">
             </a>
         </div>

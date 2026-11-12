@@ -1,9 +1,11 @@
 <script setup>
-    import { about } from '@/data/about';
+    import { storeToRefs } from 'pinia';
+    import { useContentStore } from '@/stores/content.js';
     import { useWindowsStore } from '@/stores/windows.js';
     import TaskPanelSection from '@/components/TaskPanelSection.vue';
 
     const windowsStore = useWindowsStore()
+    const { about } = storeToRefs(useContentStore())
 
 </script>
 

@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useContentStore } from '@/stores/content.js'
+
+const { cv } = storeToRefs(useContentStore())
 
 const zoom = ref(1)
 
@@ -32,12 +36,12 @@ function ZoomBw(){
             <button class="toolButton" @click="ZoomBw()">
              <img src="/icons/IE Shrink Image.png" alt="" class="img" >
             </button>
-            <a class="toolButton" href="/cv/CV.pdf" download="CV.pdf">
+            <a class="toolButton" :href="cv.pdf" download="CV.pdf">
              <img src="/icons/Save.png" alt="" class="img">
             </a>
         </div>
         <div class="viewer">
-            <img src="/cv/CV.jpg" alt="CV" :style="{
+            <img :src="cv.image" alt="CV" :style="{
                 'max-height': `calc(${zoom} * (100vh - var(--taskbar-height) - 64px))`,
                 'max-width': `calc(${zoom} * 90vw)`
             }">
