@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useWindowsStore } from '../stores/windows.js'
 import { getApp } from '../data/apps.js'
 import StartMenu from './StartMenu.vue'
+import TaskbarClock from './TaskbarClock.vue'
 const windowsStore = useWindowsStore()
 
 const menuOpen = ref(false)
@@ -31,6 +32,7 @@ onUnmounted(() => document.removeEventListener('mousedown', closeOnOutsideClick)
                 <span>{{ getApp(win.id).name }}</span>
             </div>
         </div>
+        <TaskbarClock />
     </div>
 </template>
 
