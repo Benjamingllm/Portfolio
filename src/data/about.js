@@ -1,7 +1,7 @@
 export const about = {
     name: "Benjamin Guillaume",
     title: "Étudiant en 2e année d'informatique",
-    photo: "/icons/User Accounts.png",
+    photo: "/img/photo.jpg",
     lookingFor: "À la recherche d'un stage / d'une alternance",
 
     sections: [
