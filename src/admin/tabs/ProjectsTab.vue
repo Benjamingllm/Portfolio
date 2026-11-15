@@ -1,8 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { supabase, uploadFile, safeName } from '@/lib/supabase.js'
+import { terminals } from '@/data/terminals.js'
 
-const empty = () => ({ id: null, name: '', description: '', stackText: '', image: null, link: '', github: '', position: 0 })
+const empty = () => ({
+  id: null, name: '', description: '', stackText: '', image: null, link: '', github: '', position: 0,
+  demo: '', terminal: '', controlsText: '', inProgress: false, progressUpdated: '', doneText: '', todoText: '',
+})
+const terminalKeys = Object.keys(terminals)
+const lines = text => text.split('\n').map(line => line.trim()).filter(Boolean)
 
 const projects = ref([])
 const form = ref(empty())
@@ -23,7 +29,19 @@ async function load() {
 onMounted(load)
 
 function edit(project) {
-  form.value = { ...project, stackText: project.stack.join(', '), link: project.link ?? '', github: project.github ?? '' }
+  form.value = {
+    ...project,
+    stackText: project.stack.join(', '),
+    link: project.link ?? '',
+    github: project.github ?? '',
+    demo: project.demo ?? '',
+    terminal: project.terminal ?? '',
+    controlsText: (project.controls ?? []).join('\n'),
+    inProgress: Boolean(project.progress),
+    progressUpdated: project.progress?.updated ?? '',
+    doneText: (project.progress?.done ?? []).join('\n'),
+    todoText: (project.progress?.todo ?? []).join('\n'),
+  }
   resetFile()
   status.value = ''
 }
@@ -56,6 +74,12 @@ async function save() {
       link: form.value.link.trim() || null,
       github: form.value.github.trim() || null,
       position: Number(form.value.position) || 0,
+      demo: form.value.demo.trim() || null,
+      terminal: form.value.terminal || null,
+      controls: lines(form.value.controlsText),
+      progress: form.value.inProgress
+        ? { updated: form.value.progressUpdated.trim(), done: lines(form.value.doneText), todo: lines(form.value.todoText) }
+        : null,
     }
     const { error } = form.value.id
       ? await supabase.from('projects').update(row).eq('id', form.value.id)
@@ -116,6 +140,24 @@ async function remove(project) {
       <label>Lien du site <input v-model="form.link" type="url" placeholder="https://…"></label>
       <label>GitHub <input v-model="form.github" type="url" placeholder="https://github.com/…"></label>
     </div>
+    <div class="row">
+      <label>Démo jouable <input v-model="form.demo" placeholder="/demos/valopyx/index.html"></label>
+      <label>Terminal rejoué
+        <select v-model="form.terminal">
+          <option value="">Aucun</option>
+          <option v-for="key in terminalKeys" :key="key" :value="key">{{ key }}</option>
+        </select>
+      </label>
+    </div>
+    <label>Commandes (une par ligne) <textarea v-model="form.controlsText"></textarea></label>
+    <label class="check"><input v-model="form.inProgress" type="checkbox"> Projet en cours</label>
+    <template v-if="form.inProgress">
+      <label>Mis à jour en <input v-model="form.progressUpdated" placeholder="novembre 2026"></label>
+      <div class="row">
+        <label>Fait (un point par ligne) <textarea v-model="form.doneText"></textarea></label>
+        <label>À faire (un point par ligne) <textarea v-model="form.todoText"></textarea></label>
+      </div>
+    </template>
     <div class="row">
       <label>Capture <input ref="fileInput" type="file" accept="image/*" @change="imageFile = $event.target.files[0] ?? null"></label>
       <img v-if="form.image && !imageFile" :src="form.image" alt="" class="preview">

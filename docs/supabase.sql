@@ -8,6 +8,10 @@ create table projects (
   image text,
   link text,
   github text,
+  demo text,
+  terminal text,
+  controls text[] not null default '{}',
+  progress jsonb,
   position int not null default 0,
   created_at timestamptz not null default now()
 );
