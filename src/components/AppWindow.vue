@@ -46,7 +46,7 @@ function stopDrag() {
 </script>
 
 <template>
-  <div ref="root" class="window" :class="{ maximized: win.maximized }" v-show="!win.minimized" :style="{ 'z-index': win.zIndex, 'top': win.y + 'px', 'left': win.x + 'px' }" @pointerdown="windowsStore.focusWindow(win.id)">
+  <div ref="root" class="window" :class="{ maximized: win.maximized, active: win.id === windowsStore.activeId }" v-show="!win.minimized" :style="{ 'z-index': win.zIndex, 'top': win.y + 'px', 'left': win.x + 'px' }" @pointerdown="windowsStore.focusWindow(win.id)">
     <div class="title-bar" @pointerdown="startDrag">
       <span class="title-bar-text">{{ getApp(win.id).name }}</span>
       <div class="title-bar-controls">
@@ -85,6 +85,9 @@ function stopDrag() {
 .title-bar {
   user-select: none;
   touch-action: none;
+}
+.window:not(.active) :deep(iframe) {
+  pointer-events: none;
 }
 .maximized {
   top: 0 !important;

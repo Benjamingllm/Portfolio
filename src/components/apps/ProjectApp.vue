@@ -3,6 +3,7 @@
     import { storeToRefs } from 'pinia';
     import { useContentStore } from '@/stores/content.js';
     import TaskPanelSection from '@/components/TaskPanelSection.vue';
+    import ProjectDemo from '@/components/ProjectDemo.vue';
     import { isTouch } from '@/utils/touch';
 
     const { projects } = storeToRefs(useContentStore())
@@ -43,7 +44,11 @@
         <div class="main">
             <aside class="taskPanel">
                 <template v-if="selected">
-                    <TaskPanelSection v-if="selected.link || selected.github" title="Tâches">
+                    <TaskPanelSection v-if="selected.demo || selected.link || selected.github" title="Tâches">
+                        <a v-if="selected.demo" :href="selected.demo" target="_blank" rel="noopener" class="task">
+                            <img src="/icons/IE Enlarge Image.png" alt="" class="taskIcon">
+                            Ouvrir dans un nouvel onglet
+                        </a>
                         <a v-if="selected.link" :href="selected.link" target="_blank" rel="noopener" class="task">
                             <img src="/icons/Internet Explorer 6.png" alt="" class="taskIcon">
                             Voir le site
@@ -61,23 +66,40 @@
                             <li v-for="tech in selected.stack" :key="tech">{{ tech }}</li>
                         </ul>
                     </TaskPanelSection>
+
+                    <TaskPanelSection v-if="selected.progress" title="Avancement">
+                        <p>En cours, mis à jour en {{ selected.progress.updated }}</p>
+                        <p class="progressTitle">Fait</p>
+                        <ul class="progressList">
+                            <li v-for="item in selected.progress.done" :key="item">{{ item }}</li>
+                        </ul>
+                        <p class="progressTitle">À faire</p>
+                        <ul class="progressList">
+                            <li v-for="item in selected.progress.todo" :key="item">{{ item }}</li>
+                        </ul>
+                    </TaskPanelSection>
+
+                    <TaskPanelSection v-if="selected.controls?.length" title="Commandes">
+                        <p v-for="control in selected.controls" :key="control">{{ control }}</p>
+                    </TaskPanelSection>
                 </template>
 
                 <TaskPanelSection v-else title="Détails">
                     <p class="detailsName">Projets</p>
                     <p>Dossier de fichiers</p>
-                    <p>Double-cliquez sur un dossier pour l'ouvrir.</p>
+                    <p>{{ isTouch() ? 'Touchez' : 'Double-cliquez sur' }} un dossier pour l'ouvrir.</p>
                 </TaskPanelSection>
             </aside>
 
             <div v-if="selected" class="content preview">
-                <img v-if="selected.image" :src="selected.image" :alt="`Capture de ${selected.name}`" class="capture">
+                <ProjectDemo :project="selected" />
             </div>
 
             <div v-else class="content grid">
                 <div class="item" v-for="project in projects" :key="project.id" @click="onClick(project)" @dblclick="selected = project">
                     <img src="/icons/Folder Closed.png" alt="" class="folderIcon">
                     <p>{{ project.name }}</p>
+                    <span v-if="project.progress" class="itemStatus">En cours</span>
                 </div>
             </div>
         </div>
@@ -218,16 +240,16 @@
     color: #215dc6;
 }
 
+.progressTitle{
+    font-weight: bold;
+}
+.progressList{
+    margin: 0 0 0.5em;
+    padding-left: 1.2em;
+}
+
 .preview{
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-.capture{
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #c5c2b2;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .grid{
@@ -257,8 +279,21 @@
     background-color: #316ac5;
     color: #fff;
 }
+.itemStatus{
+    color: #808080;
+}
 
 .status-bar{
     margin: 0;
+}
+
+@media (max-width: 640px){
+    .main{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .taskPanel{
+        flex: none;
+    }
 }
 </style>
