@@ -54,5 +54,6 @@ Mis à jour à la fin de chaque échange qui tranche quelque chose (2-3 lignes).
 - Décidé : fenêtre inactive → ses iframes en `pointer-events: none` (classe `.active` sur la fenêtre dans `AppWindow.vue`) : le 1er clic donne le focus, le 2e va au jeu. Drag avec iframe vérifié dans Chromium. Jeu réduit = continue de tourner, comme dans XP. Terminal fait maison plutôt qu'asciinema (zéro dépendance, pas de WSL).
 - Fait : icônes réduites à 128 px (4,9 Mo → 283 Ko), horloge (`TaskbarClock.vue`), Projets en colonne sous 640 px, README à jour.
 - Ouvert, par priorité : lancer `docs/supabase-demos.sql` sur la base ; tester le mobile sur un vrai téléphone ; boutons de titre plus gros au doigt ; pousser les dépôts Valopyx et Projet_jeux_db ; `public/icons/8d39…webp` (tier list vide, non suivi) à supprimer.
+- Fait (à vérifier dans le navigateur) : CV zoomé coupé à gauche. Centrage passé de `justify-content: center` à `margin: auto` sur l'image : quand l'image dépasse, elle déborde à droite seulement et la barre de défilement atteint tout.
 - Fait : `AppWindow.vue` sorti de `App.vue` (prop `win`, drag interne, bornes = `parentElement`, c.-à-d. `.windows`).
 - Dette : barre d'outils copiée dans 4 apps, `windows.value.find` répété dans le store, nommage incohérent (`taskbar.vue`, classes `.CV`/`.Contact`/`.ProjetApp`), `div` → `button` dans la barre.

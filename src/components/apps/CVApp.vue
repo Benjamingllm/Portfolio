@@ -73,7 +73,8 @@ function ZoomBw(){
 }
 .viewer{
     display: flex;
-    align-items: center;
-    justify-content: center;
+}
+.viewer img{
+    margin: auto;
 }
 </style>
